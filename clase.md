@@ -205,7 +205,7 @@ console.log(order);
 // ]
 ```
 
-## filter
+## filter (INMUTABLE)
 
 filter() lo que hace es filtrar el array original en base a una condición, los que la cumplan estaran en el nuevo array creado.
 
@@ -240,4 +240,143 @@ const words = ["spray", "limit", "elite", "exuberant"];
 const mayor = words.filter(item => (item.length >= 6));
 
 console.log(mayor);
+```
+
+## fiter usando un array de objetos
+
+```javascript
+const orders = [
+    {
+        customerName: "Nicolas",
+        total: 60,
+        deliver: true,
+    },
+    {
+        customerName: "Zulema",
+        total: 120,
+        deliver: true,
+    },
+    {
+        customerName: "Santiago",
+        total: 180,
+        deliver: false,
+    },
+    {
+        customerName: "Valentina",
+        total: 240,
+        deliver: true,
+    }
+];
+
+const delivered = orders.filter(item => item.deliver == true);
+console.log(delivered);
+
+// [
+//     {customerName: 'Nicolas', total: 60, deliver: true} 
+//     {customerName: 'Zulema', total: 120, deliver: true}
+//     {customerName: 'Valentina', total: 240, deliver: true}
+// ]
+```
+
+## Usando filter como buscador
+
+```javascript
+const search = (query) => {
+    return orders.filter(item => item.customerName.includes(query));
+}
+
+console.log(search("San"));
+
+// [
+//    {customerName: 'Santiago', total: 180, deliver: false}
+//    {customerName: 'Santiago', total: 280, deliver: true}
+// ]
+```
+
+## reduce
+
+Este metodo reduce a un solo valor y no devuelve otro array, simplemente un valor. Se usa para hacer cálculos a partir de la información de un array.
+
+Composicion:
+* 1° parametro El acumulador
+* 2° parametro el elemento
+* 2° Argumento: EL estado inicial
+
+```javascript
+const numbers = [1,2,3,4,5,6,7,8,9];
+
+const total = numbers.reduce((acumulador, num) => acumulador + num, 0);
+
+console.log(total);
+// 45
+```
+
+### Reduciendo array a un objeto
+
+```javascript
+const array = [1,2,3,1,2,2,2,3,3,3];
+
+const object = array.reduce((obj, item) => {
+    if(!obj[item]){
+        obj[item] = 1;
+    }
+    else{
+        obj[item] = obj[item] + 1;
+    }
+    return obj;
+},{});
+
+console.log(object);
+
+// {1: 2, 2: 4, 3: 4}
+```
+
+### Mezclando metodos 
+
+```javascript
+const objeto2 = [
+    {
+        name: "Nicolas",
+        level: "low"
+    },
+    {
+        name: "Andrea",
+        level: "medium"
+    },
+    {
+        name: "Zulema",
+        level: "hight"
+    },
+    {
+        name: "Pedro",
+        level: "low"
+    },
+    {
+        name: "Maria",
+        level: "medium"
+    },
+    {
+        name: "Fernando",
+        level: "medium"
+    },
+];
+
+const levels = objeto2
+.map(lev => lev.level)
+.reduce((levObj, levDesc) => {
+    if(!levObj[levDesc]){
+        levObj[levDesc] = 1;
+    }else{
+        levObj[levDesc] = levObj[levDesc] + 1;
+    }
+    return levObj;
+},{})
+
+console.log(levels);
+
+// {
+//    low: 2, 
+//    medium: 3, 
+//    hight: 1
+// }
 ```

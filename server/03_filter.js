@@ -31,14 +31,23 @@ const orders = [
     {
         customerName: "Santiago",
         total: 180,
-        deliver: true,
+        deliver: false,
     },
     {
-        customerName: "Valentina",
-        total: 240,
+        customerName: "Santiago",
+        total: 280,
         deliver: true,
-    }
+    },
 ];
 
-const delivered = orders.filter(item => item.deliver == true);
-console.log(delivered);
+// const delivered = orders.filter(item => item.deliver == true && item.total > 100);
+// console.log(delivered);
+
+const search = (query) => {
+    return orders.filter(item => item.customerName.includes(query));
+}
+
+console.log(search("San"));
+
+
+
