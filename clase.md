@@ -732,6 +732,20 @@ console.log(newArray);
 
 // [1, 2, 3, 4, 5, 6, 1, 2, 1, 2, 7, 8, 9]
 ```
+
+### Usando otra forma recursiva
+
+```javascript
+const array =  [1, [2,3], [4,[5,[6]]]] ;
+function flatten(array){
+    return array.reduce((ac, it)=>ac.concat(Array.isArray(it) ? flatten(it) : it),[]);
+}
+
+console.log(flatten(array));
+
+// [ 1, 2, 3, 4, 5, 6 ]
+```
+
 ### Usando flat()
 ```javascript
 const matriz = [
@@ -744,4 +758,72 @@ const flatArray = matriz.flat(3);
 console.log(flatArray);
 
 // [1, 1, 2, 2, 3, 3, 4, 4]
+```
+## flatMap
+
+## Combinando metodos
+
+```javascript
+const users = [
+    { userId: 1, username: "Tom", attributes: ["Nice", "Cute"]},
+    { userId: 2, username: "Mike", attributes: ["Lovely"]},
+    { userId: 3, username: "Nico", attributes: ["Nice", "Cool"]},
+  ];
+
+  const atribut = users.map(iter => iter.attributes).flat(2);
+
+  console.log(atribut);
+
+  // [ 'Nice', 'Cute', 'Lovely', 'Nice', 'Cool' ]
+```
+
+## Con flatMap
+
+```javascript
+const users = [
+    { userId: 1, username: "Tom", attributes: ["Nice", "Cute"]},
+    { userId: 2, username: "Mike", attributes: ["Lovely"]},
+    { userId: 3, username: "Nico", attributes: ["Nice", "Cool"]},
+  ];
+
+  const atribut = users.flatMap(iter => iter.attributes);
+
+  console.log(atribut);
+
+  // [ 'Nice', 'Cute', 'Lovely', 'Nice', 'Cool' ]
+```
+### Ejemplo 2 
+
+Podemos utilizar flatMap aqui pero nos daria un resultado equivocado ya que flatMap primero ejecuta el map() y despues el flat 
+
+```javascript
+  const calendars = {
+    primaryCalendar: [{
+        startDate: new Date(2021, 1, 1, 15),
+        endDate: new Date(2021, 1, 1, 15, 30),
+        title: "Cita 1",
+      },
+      {
+        startDate: new Date(2021, 1, 1, 17),
+        endDate: new Date(2021, 1, 1, 18),
+        title: "Cita 2",
+      },
+    ],
+
+
+    secondaryCalendar: [{
+        startDate: new Date(2021, 1, 1, 12),
+        endDate: new Date(2021, 1, 1, 12, 30),
+        title: "Cita 2",
+      },
+      {
+        startDate: new Date(2021, 1, 1, 9),
+        endDate: new Date(2021, 1, 1, 10),
+        title: "Cita 4",
+      },
+    ],
+  };
+
+  const fechas = Object.values(calendars).flat().map(iter => iter.startDate);
+  console.log(fechas);
 ```
