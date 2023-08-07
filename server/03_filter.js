@@ -34,7 +34,7 @@ const orders = [
         deliver: false,
     },
     {
-        customerName: "Santiago",
+        customerName: "Santi",
         total: 280,
         deliver: true,
     },

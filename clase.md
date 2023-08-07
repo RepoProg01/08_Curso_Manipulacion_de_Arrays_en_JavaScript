@@ -293,7 +293,7 @@ console.log(search("San"));
 // ]
 ```
 
-## reduce
+## reduce (INMUTABLE)
 
 Este metodo reduce a un solo valor y no devuelve otro array, simplemente un valor. Se usa para hacer cálculos a partir de la información de un array.
 
@@ -379,4 +379,369 @@ console.log(levels);
 //    medium: 3, 
 //    hight: 1
 // }
+```
+
+## some (INMUTABLE)
+
+Este método nos devuelve true o false sí al menos 1 elemento de nuestro array cumple con la condición.
+
+### con un array regular
+Forma tradicional con un for:
+
+```javascript
+const numbers = [1,2,3,4,5];
+
+let estatus = false;
+
+for(let i=0; i<numbers.length; i++){
+    if(numbers[i] % 2 === 0){
+        estatus = true;
+    }
+}
+console.log(estatus);
+// true
+```
+Usando some
+
+```javascript
+const numbers = [1,2,3,4,5];
+const metMap = numbers.some(item => item % 2 === 0);
+
+console.log(metMap);
+// true
+```
+### con un array de objetos
+
+```javascript
+const orders = [
+    {
+        customerName: "Nicolas",
+        total: 60,
+        deliver: true,
+    },
+    {
+        customerName: "Zulema",
+        total: 120,
+        deliver: true,
+    },
+    {
+        customerName: "Santiago",
+        total: 180,
+        deliver: false,
+    },
+    {
+        customerName: "Santiago",
+        total: 280,
+        deliver: true,
+    },
+];
+
+const arraySome = orders.some(item => item.total < 50);
+console.log(arraySome);
+// true
+```
+
+## every (INMUTABLE)
+
+Este método es el contrario a some(), devuelve true o false sí TODOS los elementos del array cumplen la condición.
+
+```javascript
+const lista = ["luis", "pedro", "juana", "maria"];
+const check = lista.every(item => item.length > 3);
+console.log(check);
+
+// true
+
+//  ejemplo2
+
+const lista2 = [12,33,43,22,55,23,12,34,43,33];
+const check2 = lista2.every(item => item < 55);
+console.log(check2);
+
+// false
+```
+
+## find y findIndex
+
+El método find() devuelve el primer elemento del array que cumpla con la condición dada o no devuelve undefined si es que no encuentra ningún elemento que cumpla los requisitos pedidos.
+
+```javascript
+const array = [1,3,5,3,34,23,52];
+
+// ---------------USANDO FOR----------------
+
+let resultado = undefined;
+
+for(let i=0; i<array.length; i++){
+    const valor = array[i];
+    if(valor === 30){
+        resultado = valor;
+        break;
+    }
+}
+
+console.log(resultado);
+
+// undefined
+
+// ---------------USANDO FIND----------------
+
+const respuesta2 = array.find(item => item == 34);
+
+console.log(respuesta2);
+
+// 34
+```
+
+### findIndex
+
+findIndex() : Retorna el índice del primer elemento de un array que cumpla con la función de prueba proporcionada. En caso contrario devuelve -1.
+```javascript
+const products = [
+    {
+      name: "Pizza",
+      price: 12,
+      id: '🍕'
+    },
+    {
+      name: "Burger",
+      price: 23,
+      id: '🍔'
+    },
+    {
+      name: "Hot dog",
+      price: 23,
+      id: '🌭'
+    },
+    {
+      name: "Hot cakes",
+      price: 355,
+      id: '🥞'
+    },
+  ];
+
+  const buscar2 = products.findIndex(item => item.id == "🌭");
+  console.log(buscar2);
+
+  // 2
+
+```
+
+## includes
+
+El método includes() determina si una array incluye un determinado elemento, devuelve true o false según corresponda.
+
+### Nota:
+### some() e includes() pareciera que hacen lo mismo ya que ambos regrezan un true o false y tambien solamente el primero que encuentran  pero la diferencia es que:
+* some() 
+    * verifica si algún elemento de un arreglo cumple con la condición que le pases. 
+    
+* includes() 
+    * únicamente revisa si un elemento existe en tu arreglo. 
+
+```javascript
+const pets = ["cat","dog","fish"];
+
+// ----------- Con un for tradicional ------------
+let resultado = false;
+
+for(let i=0; i<pets.length; i++){
+    const valor = pets[i];
+    if(valor == "dog"){
+        resultado = true;
+        break;
+    }
+}
+
+console.log(resultado);
+
+// true 
+```
+
+### Usando includes
+
+```javascript
+const pets = ["cat","dog","fish"];
+const result = pets.includes("dog");
+console.log(result);
+
+// true
+```
+
+## join
+
+El método join() une todos los elementos de un array en una cadena y devuelve esta cadena. Podemos pasarle cualquier elemento como separador que deseemos.
+
+### Usando un for tradicional
+
+```javascript
+const elements = ["fire", "air", "water"];
+
+const separator = "-"
+let result ="";
+for(let i=0; i<elements.length; i++){
+    const element = elements[i];
+    if((elements.length - 1) === i){
+        result += element;
+    }else{
+        result += element + separator;
+    }
+}
+ console.log(result);
+
+// fire-air-water
+
+
+```
+
+### Usando join 
+
+```javascript
+const elements = ["fire", "air", "water"];
+const result2 = elements.join("-");
+console.log(result2);
+
+// fire-air-water
+```
+
+## split
+
+Split: Transforma un string a un array dada un patro para hacer la separacion de elementos en el array
+
+```javascript
+const title = "Curso de manipulacion de arrays";
+const title2 = title.split(" ");
+console.log(title2);
+
+// ['Curso', 'de', 'manipulacion', 'de', 'arrays']
+```
+
+## split(""), join(""), toUpperCase(), toLowerCase(), replaceAll("","")
+```javascript
+const title = "Curso de Manipulacion de Arrays";
+
+const title2 = title.split(" ");
+console.log(title2);
+// ['Curso', 'de', 'manipulacion', 'de', 'arrays']
+
+const title3 = title2.join(" ");
+console.log(title3);
+// Curso de manipulacion de arrays
+
+const title4 = title3.toUpperCase();
+console.log(title4);
+// CURSO DE MANIPULACION DE ARRAYS
+
+const title5 = title.toLowerCase();
+console.log(title5);
+// curso de manipulacion de arrays
+
+const title6 = title.replaceAll(" ", "-");
+console.log(title6);
+// Curso-de-Manipulacion-de-Arrays
+```
+
+## concat (INMUTABLE)
+
+Método concat: fusiona arrays. Es inmutable (no modifica el array original).
+
+```javascript
+const array1 = [1,1,2,2];
+const array2 = [3,3,4,4];
+
+const array3 = [...array1 , ...array2];
+console.log(array3);
+// [1, 1, 2, 2, 3, 3, 4, 4]
+
+const array4 = array1.concat(array2);
+console.log(array4);
+// [1, 1, 2, 2, 3, 3, 4, 4]
+
+array1.push(5);
+array2.push(8);
+
+console.log(array1);
+// [1, 1, 2, 2, 5]
+console.log(array2);
+// [3, 3, 4, 4, 8]
+console.log(array3);
+// [1, 1, 2, 2, 3, 3, 4, 4]
+console.log(array4);
+// [1, 1, 2, 2, 3, 3, 4, 4]
+```
+### Una forma de concatenar dos arrays pero sin elemtos repetidos es utilizando set() junto el operador de propagacion ejemplo:
+
+```javascript
+const arrayA = ["PHP","Java","Javascript"];
+const arrayB = ["CSS","HTML","PHP","Javascript"];
+
+const unicos = [...new Set([...arrayA, ...arrayB])];
+
+console.log(unicos);
+
+// [ 'PHP', 'Java', 'Javascript', 'CSS', 'HTML' ]
+```
+## flat
+
+### Usando una funcion recursiva
+
+```javascript
+const matriz = [
+    [1,2,3],
+    [4,5,6, [1,2 ,[1,2]]],
+    [7,8,9]
+];
+
+const arrayFlt = [];
+function recursive(matriz){
+    for (let item of matriz) {
+        if(item.length > 1){
+            recursive(item);
+        }else{
+            arrayFlt.push(item);
+        }
+    }
+}
+
+recursive(matriz);
+console.log(arrayFlt);
+
+// [1, 1, 2, 2, 3, 3, 4, 4]
+```
+### Ejemplo de otra forma recursiva
+
+```javascript
+const matriz = [
+    [1,2,3],
+    [4,5,6, [1,2, [1,2]]],
+    [7,8,9]
+];
+
+function profundidad(list) {
+    let newList = [];
+    if (typeof list != "object") return [list];
+    list.forEach(element => {
+        newList = newList.concat(profundidad(element));
+    });
+    return newList;
+}
+
+const newArray = profundidad(matriz);
+
+console.log(newArray);
+
+// [1, 2, 3, 4, 5, 6, 1, 2, 1, 2, 7, 8, 9]
+```
+### Usando flat()
+```javascript
+const matriz = [
+    [1,2,3],
+    [4,5,6, [1,2 ,[1,2]]],
+    [7,8,9]
+];
+
+const flatArray = matriz.flat(3);
+console.log(flatArray);
+
+// [1, 1, 2, 2, 3, 3, 4, 4]
 ```
